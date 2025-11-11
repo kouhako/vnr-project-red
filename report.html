@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo phân công nhiệm vụ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chat.css">
+    <script>
+        (function() {
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const configScript = document.createElement('script');
+            configScript.src = isLocal ? 'config.js' : '/api/config.js';
+            configScript.onerror = function() {
+                console.warn('Không thể load config.js');
+            };
+            document.head.appendChild(configScript);
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="main-title">Báo cáo phân công nhiệm vụ nhóm</h1>
+                <p class="subtitle">Tổng kết vai trò và đóng góp của các thành viên</p>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html" class="home-icon">
+                <img src="Image/icon.jpg" alt="Trang chủ" class="home-icon-img">
+            </a>
+            <ul class="nav-list">
+                <li><a href="moc1.html" class="nav-link">Mốc 1</a></li>
+                <li><a href="moc2.html" class="nav-link">Mốc 2</a></li>
+                <li><a href="moc3.html" class="nav-link">Mốc 3</a></li>
+                <li><a href="moc4.html" class="nav-link">Mốc 4</a></li>
+                <li><a href="moc5.html" class="nav-link">Mốc 5</a></li>
+                <li><a href="moc6.html" class="nav-link">Mốc 6</a></li>
+                <li><a href="moc7.html" class="nav-link">Mốc 7</a></li>
+                <li><a href="moc8.html" class="nav-link">Mốc 8</a></li>
+                <li><a href="moc9.html" class="nav-link">Mốc 9</a></li>
+                <li><a href="report.html" class="nav-link active">Báo cáo</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <div class="content-section fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">Phân công nhiệm vụ và đóng góp</h2>
+                </div>
+
+                <div class="card-layout">
+                    <!-- Làm Web -->
+                    <div class="info-card highlight-card">
+                        <div class="card-icon">💻</div>
+                        <h3 class="card-title">Làm Web</h3>
+                        <ul class="task-list">
+                            <li>
+                                <strong>Lê Hà An</strong>
+                                <ul>
+                                    <li>Thiết kế giao diện, bố cục các trang, tích hợp các hiệu ứng, animation 1, 2, 3.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Nguyễn Đình Bảo</strong>
+                                <ul>
+                                    <li>Thiết kế giao diện, bố cục các trang, tích hợp các hiệu ứng, animation 4, 5, 6.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Trương Gia Hưng</strong>
+                                <ul>
+                                    <li>Thiết kế giao diện, bố cục các trang, tích hợp các hiệu ứng, animation 7, 8, 9.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Làm Nội dung -->
+                    <div class="info-card">
+                        <div class="card-icon">✍️</div>
+                        <h3 class="card-title">Làm Nội dung</h3>
+                        <ul class="task-list">
+                            <li>
+                                <strong>Nguyễn Văn Hữu Hiền</strong>
+                                <ul>
+                                    <li>Soạn nội dung cho các phần 1, 2, 3, 4, 5, 6, 7, 8, 9.</li>
+                                    <li>Hiệu chỉnh các nội dung, và đảm bảo tính chính xác của thông tin.</li>
+                                    <li>Làm nội dung liên quan tới quiz.</li>
+                                    <li>Làm flipbook, tìm ảnh, tham gia vào quá trình hiệu chỉnh nội dung.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Mai Thị Hoàng Anh</strong>
+                                <ul>
+                                    <li>Soạn nội dung cho các phần 6, 7, 8, 9.</li>
+                                    <li>Làm video giới thiệu, tìm ảnh và tư liệu.</li>
+                                    <li>Tham gia vào quá trình hiệu chỉnh nội dung.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- AI Hỗ trợ -->
+                    <div class="info-card">
+                        <div class="card-icon">🤖</div>
+                        <h3 class="card-title">AI Support</h3>
+                        <ul class="task-list">
+                            <li>
+                                <strong>Sử dụng Gemini:</strong>
+                                <ul>
+                                    <li>Tham khảo, soạn, tối ưu nội dung.</li>
+                                    <li>Cụ thể là sử dụng trong phần chia các mốc.</li>
+                                    <li>Gợi ý tìm hình ảnh thích hợp.</li>
+                                    <li>Xác minh nguồn của các tài liệu tham khảo.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Sử dụng Veo 3:</strong>
+                                <ul>
+                                    <li>Làm và dựng video giới thiệu.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <p>&copy; 2025 - Trang web lịch sử</p>
+        </footer>
+    </div>
+
+    <!-- Chat Widget -->
+    <div id="chat-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </div>
+
+    <div id="chat-widget">
+        <div id="chat-header">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                AI Trợ lý
+            </span>
+            <button id="chat-toggle">×</button>
+        </div>
+        <div id="chat-body"></div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Nhập câu hỏi của bạn...">
+            <button id="send-btn">Gửi</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>

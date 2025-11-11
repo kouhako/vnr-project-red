@@ -1,0 +1,39 @@
+# API Keys và sensitive data
+config.js
+.env
+.env.local
+.env.production
+
+# Node modules (nếu có)
+node_modules/
+package-lock.json
+yarn.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build files
+dist/
+build/
+.vercel/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+

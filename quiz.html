@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Trắc nghiệm lịch sử Đảng</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .quiz-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .quiz-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .quiz-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        .quiz-mode-selection {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .mode-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .mode-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 3px solid transparent;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .mode-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .mode-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .mode-time {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .mode-topics {
+            font-size: 1rem;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        .quiz-progress {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--bg-dark) 100%);
+            color: var(--text-light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .timer-container {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .timer-label {
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .timer-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .timer-display.warning {
+            color: var(--accent-color);
+            animation: pulse 1s infinite;
+        }
+
+        .timer-display.danger {
+            color: var(--secondary-color);
+            animation: pulse 0.5s infinite;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .progress-bar-container {
+            flex: 1;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--text-light);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            margin-bottom: 1rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, rgba(26, 77, 110, 0.05) 0%, rgba(248, 249, 250, 0.95) 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .option-label:hover {
+            background: linear-gradient(135deg, rgba(26, 77, 110, 0.1) 0%, rgba(248, 249, 250, 0.95) 100%);
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .option-label.selected {
+            background: linear-gradient(135deg, rgba(26, 77, 110, 0.15) 0%, rgba(248, 249, 250, 0.95) 100%);
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(26, 77, 110, 0.2);
+        }
+
+        .option-label.correct {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.2) 0%, rgba(248, 249, 250, 0.95) 100%);
+            border-color: #28a745;
+        }
+
+        .option-label.wrong {
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.2) 0%, rgba(248, 249, 250, 0.95) 100%);
+            border-color: var(--secondary-color);
+        }
+
+        .option-radio {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+         .quiz-buttons {
+             display: flex;
+             gap: 1rem;
+             justify-content: center;
+             align-items: center;
+             margin-top: 2rem;
+             flex-wrap: wrap;
+         }
+
+        .btn-quiz {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--bg-dark) 100%);
+            color: var(--text-light);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #a0162a 100%);
+            color: var(--text-light);
+        }
+
+         .btn-restart:hover {
+             transform: translateY(-3px);
+             box-shadow: var(--shadow-lg);
+         }
+
+         .btn-nav {
+             background: linear-gradient(135deg, rgba(26, 77, 110, 0.8) 0%, rgba(30, 58, 95, 0.8) 100%);
+             color: var(--text-light);
+         }
+
+         .btn-nav:hover {
+             transform: translateY(-3px);
+             box-shadow: var(--shadow-lg);
+             background: linear-gradient(135deg, var(--primary-color) 0%, var(--bg-dark) 100%);
+         }
+
+         .btn-nav:disabled {
+             opacity: 0.5;
+             cursor: not-allowed;
+             transform: none;
+         }
+
+        .result-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 250, 0.98) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 2rem auto;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border-top: 8px solid var(--accent-color);
+            max-width: 600px;
+            display: none;
+        }
+
+        .result-card.show {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .result-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .result-score {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+
+        .result-message {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(26, 77, 110, 0.05) 0%, transparent);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .answer-explanation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            font-style: italic;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 1rem;
+            }
+
+            .quiz-title {
+                font-size: 2rem;
+            }
+
+            .question-card {
+                padding: 1.5rem;
+            }
+
+            .quiz-buttons {
+                flex-direction: column;
+            }
+
+            .btn-quiz {
+                width: 100%;
+            }
+
+            .mode-options {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="main-title">🧠 Trắc nghiệm lịch sử Đảng</h1>
+                <p class="subtitle">Kiểm tra kiến thức của bạn về lịch sử Đảng Cộng sản Việt Nam</p>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html" class="home-icon">
+                <img src="Image/icon.jpg" alt="Trang chủ" class="home-icon-img">
+            </a>
+            <ul class="nav-list">
+                <li><a href="moc1.html" class="nav-link">Mốc 1</a></li>
+                <li><a href="moc2.html" class="nav-link">Mốc 2</a></li>
+                <li><a href="moc3.html" class="nav-link">Mốc 3</a></li>
+                <li><a href="moc4.html" class="nav-link">Mốc 4</a></li>
+                <li><a href="moc5.html" class="nav-link">Mốc 5</a></li>
+                <li><a href="moc6.html" class="nav-link">Mốc 6</a></li>
+                <li><a href="moc7.html" class="nav-link">Mốc 7</a></li>
+                <li><a href="moc8.html" class="nav-link">Mốc 8</a></li>
+                <li><a href="moc9.html" class="nav-link">Mốc 9</a></li>
+                <li><a href="report.html" class="nav-link">Báo cáo</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <div class="quiz-container">
+                <!-- Quiz Mode Selection -->
+                <div id="quiz-mode-selection" class="quiz-mode-selection">
+                    <h2 class="quiz-title">🧠 Chọn chế độ trắc nghiệm</h2>
+                    <p class="quiz-subtitle">Chọn số câu hỏi và thời gian làm bài</p>
+                    <div class="mode-options">
+                        <div class="mode-card" data-mode="10">
+                            <div class="mode-icon">📝</div>
+                            <h3>10 Câu hỏi</h3>
+                            <p class="mode-time">⏱️ 12 phút</p>
+                            <p class="mode-topics">Mốc 2, 5, 8</p>
+                        </div>
+                        <div class="mode-card" data-mode="15">
+                            <div class="mode-icon">📚</div>
+                            <h3>15 Câu hỏi</h3>
+                            <p class="mode-time">⏱️ 17 phút</p>
+                            <p class="mode-topics">Mốc 4, 6, 7</p>
+                        </div>
+                        <div class="mode-card" data-mode="20">
+                            <div class="mode-icon">🎯</div>
+                            <h3>20 Câu hỏi</h3>
+                            <p class="mode-time">⏱️ 22 phút</p>
+                            <p class="mode-topics">Tất cả các mốc</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Content -->
+                <div id="quiz-content-wrapper" style="display: none;">
+                    <div class="quiz-header">
+                        <h2 class="quiz-title" id="quiz-title">🧠 Trắc nghiệm</h2>
+                        <p class="quiz-subtitle">Chọn đáp án đúng cho mỗi câu hỏi</p>
+                    </div>
+
+                    <div class="quiz-progress">
+                        <div class="timer-container">
+                            <span class="timer-label">⏱️ Thời gian:</span>
+                            <span class="timer-display" id="timer-display">00:00</span>
+                        </div>
+                        <div class="progress-info">
+                            <span id="current-question">Câu 1</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="progress-bar"></div>
+                            </div>
+                            <span id="total-questions">/ 20</span>
+                        </div>
+                    </div>
+
+                    <div id="quiz-content"></div>
+
+                    <div class="quiz-buttons">
+                        <button class="btn-quiz btn-nav" id="prev-btn" style="display: none;">← Câu trước</button>
+                        <button class="btn-quiz btn-nav" id="next-btn">Câu sau →</button>
+                        <button class="btn-quiz btn-submit" id="submit-btn" disabled>Nộp bài</button>
+                        <button class="btn-quiz btn-restart" id="restart-btn" style="display: none;">Làm lại</button>
+                    </div>
+
+                    <div class="result-card" id="result-card">
+                        <div class="result-icon" id="result-icon">🎉</div>
+                        <h3 class="result-title" id="result-title">Kết quả</h3>
+                        <div class="result-score" id="result-score">0/20</div>
+                        <div class="result-message" id="result-message"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <p>&copy; 2025 - Trang web lịch sử</p>
+        </footer>
+    </div>
+
+    <script>
+        // Phân loại câu hỏi theo mốc
+        const allQuestions = [
+            // Mốc 1 (index 0-1)
+            {
+                question: "Chiến dịch Hồ Chí Minh toàn thắng vào ngày nào?",
+                options: ["26/4/1975", "30/4/1975", "1/5/1975", "2/5/1975"],
+                correct: 1,
+                milestone: 1
+            },
+            {
+                question: "Sau Hiệp định Paris năm 1973, quân đội nào buộc phải rút khỏi miền Nam Việt Nam?",
+                options: ["Pháp", "Mỹ", "Anh", "Nhật"],
+                correct: 1,
+                milestone: 1
+            },
+            // Mốc 2 (index 2-4)
+            {
+                question: "Đại hội IV của Đảng (1976) đánh dấu điều gì?",
+                options: ["Khởi đầu công cuộc Đổi mới", "Thống nhất đất nước về mọi mặt", "Thành lập Mặt trận Dân tộc Giải phóng", "Bắt đầu chiến tranh bảo vệ biên giới"],
+                correct: 1,
+                milestone: 2
+            },
+            {
+                question: "Tại Đại hội IV, Đảng Lao động Việt Nam đổi tên thành:",
+                options: ["Đảng Nhân dân Việt Nam", "Đảng Dân chủ Việt Nam", "Đảng Cộng sản Việt Nam", "Đảng Lao động thống nhất"],
+                correct: 2,
+                milestone: 2
+            },
+            {
+                question: "Mục tiêu của Kế hoạch 5 năm (1976–1980) là:",
+                options: ["Đẩy mạnh công nghiệp hóa hiện đại hóa", "Khôi phục kinh tế, cải thiện đời sống nhân dân", "Phát triển thương mại quốc tế", "Gia nhập ASEAN"],
+                correct: 1,
+                milestone: 2
+            },
+            // Mốc 3 (index 5-6)
+            {
+                question: "Đại hội V (1982) diễn ra trong bối cảnh:",
+                options: ["Kinh tế phát triển nhanh", "Bị bao vây, cấm vận, khó khăn kinh tế", "Đất nước hòa bình, ổn định", "Bước vào thời kỳ hội nhập"],
+                correct: 1,
+                milestone: 3
+            },
+            {
+                question: "Hai nhiệm vụ chiến lược Đại hội V xác định là:",
+                options: ["Bảo vệ Tổ quốc và mở rộng hợp tác quốc tế", "Xây dựng CNXH và bảo vệ Tổ quốc", "Công nghiệp hóa và hội nhập", "Phát triển nông nghiệp và xuất khẩu"],
+                correct: 1,
+                milestone: 3
+            },
+            // Mốc 4 (index 7-9)
+            {
+                question: "Đại hội VI (1986) được coi là:",
+                options: ["Đại hội Thống nhất", "Đại hội Đổi mới", "Đại hội Kháng chiến", "Đại hội Công nghiệp hóa"],
+                correct: 1,
+                milestone: 4
+            },
+            {
+                question: "Đại hội VI bầu ai làm Tổng Bí thư?",
+                options: ["Lê Duẩn", "Đỗ Mười", "Nguyễn Văn Linh", "Nông Đức Mạnh"],
+                correct: 2,
+                milestone: 4
+            },
+            {
+                question: "Trọng tâm của đường lối đổi mới Đại hội VI là:",
+                options: ["Đổi mới văn hóa", "Đổi mới giáo dục", "Đổi mới kinh tế", "Đổi mới chính trị trước tiên"],
+                correct: 2,
+                milestone: 4
+            },
+            // Mốc 5 (index 10-11)
+            {
+                question: "Đại hội VII (1991) thông qua văn kiện nào quan trọng?",
+                options: ["Hiến pháp 1992", "Cương lĩnh 1991", "Nghị quyết Trung ương 7", "Luật đổi mới kinh tế"],
+                correct: 1,
+                milestone: 5
+            },
+            {
+                question: "Phương châm đối ngoại Đại hội VII là:",
+                options: ["Đóng cửa kinh tế", "Chỉ hợp tác với các nước XHCN", "Việt Nam muốn là bạn với tất cả các nước", "Chỉ quan hệ với ASEAN"],
+                correct: 2,
+                milestone: 5
+            },
+            // Mốc 6 (index 12-13)
+            {
+                question: "Đại hội VIII (1996) xác định nhiệm vụ trung tâm là:",
+                options: ["Đổi mới giáo dục", "Công nghiệp hóa – hiện đại hóa", "Xây dựng quốc phòng toàn dân", "Phát triển nông nghiệp"],
+                correct: 1,
+                milestone: 6
+            },
+            {
+                question: "Việt Nam gia nhập ASEAN năm nào?",
+                options: ["1986", "1990", "1995", "1996"],
+                correct: 2,
+                milestone: 6
+            },
+            // Mốc 7 (index 14-15)
+            {
+                question: "Đại hội IX (2001) đề ra chiến lược phát triển kinh tế – xã hội đến năm nào?",
+                options: ["2005", "2010", "2015", "2020"],
+                correct: 1,
+                milestone: 7
+            },
+            {
+                question: "Tổng Bí thư được bầu tại Đại hội IX là ai?",
+                options: ["Đỗ Mười", "Nguyễn Văn Linh", "Lê Khả Phiêu", "Nông Đức Mạnh"],
+                correct: 3,
+                milestone: 7
+            },
+            // Mốc 8 (index 16-18)
+            {
+                question: "Đại hội XI (2011) thông qua văn kiện quan trọng nào?",
+                options: ["Cương lĩnh (bổ sung, phát triển) năm 1991", "Hiến pháp mới", "Chiến lược biển Việt Nam", "Cương lĩnh 1986"],
+                correct: 0,
+                milestone: 8
+            },
+            {
+                question: "Ba đột phá chiến lược của Chiến lược 2011–2020 gồm:",
+                options: ["Giáo dục, y tế, khoa học", "Thể chế, nhân lực, hạ tầng", "Nông nghiệp, công nghiệp, thương mại", "Quốc phòng, an ninh, đối ngoại"],
+                correct: 1,
+                milestone: 8
+            },
+            {
+                question: "Tổng Bí thư tại Đại hội XI là:",
+                options: ["Nông Đức Mạnh", "Nguyễn Phú Trọng", "Nguyễn Văn Linh", "Trường Chinh"],
+                correct: 1,
+                milestone: 8
+            },
+            // Mốc 9 (index 19)
+            {
+                question: "Đến năm 2018, Việt Nam đạt thành tựu nổi bật nào sau gần 40 năm Đổi mới?",
+                options: ["Trở thành nước công nghiệp phát triển", "Gia nhập Liên minh châu Âu", "Trở thành quốc gia có thu nhập trung bình, kinh tế năng động hàng đầu Đông Nam Á", "Kinh tế vẫn trì trệ"],
+                correct: 2,
+                milestone: 9
+            }
+        ];
+
+        // Cấu hình các chế độ quiz
+        const quizModes = {
+            10: {
+                milestones: [2, 5, 8],
+                timeMinutes: 12,
+                timeSeconds: 12 * 60
+            },
+            15: {
+                milestones: [4, 6, 7],
+                timeMinutes: 17,
+                timeSeconds: 17 * 60
+            },
+            20: {
+                milestones: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                timeMinutes: 22,
+                timeSeconds: 22 * 60
+            }
+        };
+
+        let questions = [];
+        let userAnswers = [];
+        let currentQuestionIndex = 0;
+        let isSubmitted = false;
+        let selectedMode = null;
+        let timeRemaining = 0;
+        let timerInterval = null;
+
+        // Chọn chế độ quiz
+        function selectMode(mode) {
+            selectedMode = parseInt(mode);
+            const config = quizModes[selectedMode];
+            
+            // Lọc câu hỏi theo mốc
+            questions = allQuestions.filter(q => config.milestones.includes(q.milestone));
+            
+            // Nếu số câu hỏi nhiều hơn số câu cần, chọn ngẫu nhiên
+            if (questions.length > selectedMode) {
+                // Shuffle và lấy số câu cần
+                questions = questions.sort(() => Math.random() - 0.5).slice(0, selectedMode);
+            }
+            
+            // Khởi tạo timer
+            timeRemaining = config.timeSeconds;
+            
+            // Ẩn mode selection, hiện quiz
+            document.getElementById('quiz-mode-selection').style.display = 'none';
+            document.getElementById('quiz-content-wrapper').style.display = 'block';
+            document.getElementById('quiz-title').textContent = `🧠 ${selectedMode} Câu trắc nghiệm`;
+            
+            // Khởi tạo quiz
+            initQuiz();
+        }
+
+        // Khởi tạo timer
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    // Tự động nộp bài khi hết thời gian
+                    if (!isSubmitted) {
+                        submitQuiz();
+                    }
+                }
+            }, 1000);
+        }
+
+        // Cập nhật hiển thị timer
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            const timerDisplay = document.getElementById('timer-display');
+            
+            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            // Cảnh báo khi còn ít thời gian
+            timerDisplay.classList.remove('warning', 'danger');
+            if (timeRemaining <= 60) {
+                timerDisplay.classList.add('danger');
+            } else if (timeRemaining <= 180) {
+                timerDisplay.classList.add('warning');
+            }
+        }
+
+        function initQuiz() {
+            userAnswers = [];
+            currentQuestionIndex = 0;
+            isSubmitted = false;
+            document.getElementById('result-card').classList.remove('show');
+            document.getElementById('restart-btn').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'block';
+            document.getElementById('prev-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'block';
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('total-questions').textContent = `/ ${selectedMode}`;
+            
+            // Khởi động timer
+            startTimer();
+            
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const quizContent = document.getElementById('quiz-content');
+            const question = questions[currentQuestionIndex];
+            
+            quizContent.innerHTML = `
+                <div class="question-card">
+                    <span class="question-number">${currentQuestionIndex + 1}</span>
+                    <div class="question-text">${question.question}</div>
+                    <ul class="options-list">
+                        ${question.options.map((option, index) => `
+                            <li class="option-item">
+                                <label class="option-label ${userAnswers[currentQuestionIndex] === index ? 'selected' : ''}" data-index="${index}">
+                                    <input type="radio" name="question-${currentQuestionIndex}" value="${index}" class="option-radio" ${userAnswers[currentQuestionIndex] === index ? 'checked' : ''}>
+                                    <span>${String.fromCharCode(65 + index)}. ${option}</span>
+                                </label>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+
+            // Add event listeners
+            document.querySelectorAll('.option-label').forEach(label => {
+                label.addEventListener('click', function() {
+                    if (isSubmitted) return;
+                    
+                    const index = parseInt(this.dataset.index);
+                    userAnswers[currentQuestionIndex] = index;
+                    
+                    document.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('.option-radio').checked = true;
+                    
+                    updateProgress();
+                });
+            });
+
+            updateProgress();
+        }
+
+         function updateProgress() {
+             const answeredCount = userAnswers.filter(a => a !== undefined).length;
+             const progress = (answeredCount / questions.length) * 100;
+             
+             document.getElementById('progress-bar').style.width = progress + '%';
+             document.getElementById('current-question').textContent = `Câu ${currentQuestionIndex + 1}`;
+             
+             // Update navigation buttons
+             document.getElementById('prev-btn').style.display = currentQuestionIndex > 0 ? 'block' : 'none';
+             document.getElementById('next-btn').style.display = currentQuestionIndex < questions.length - 1 ? 'block' : 'none';
+             
+             if (answeredCount === questions.length) {
+                 document.getElementById('submit-btn').disabled = false;
+             }
+         }
+
+         function stopTimer() {
+             if (timerInterval) {
+                 clearInterval(timerInterval);
+                 timerInterval = null;
+             }
+         }
+
+         function goToNextQuestion() {
+             if (currentQuestionIndex < questions.length - 1) {
+                 currentQuestionIndex++;
+                 renderQuiz();
+             }
+         }
+
+         function goToPrevQuestion() {
+             if (currentQuestionIndex > 0) {
+                 currentQuestionIndex--;
+                 renderQuiz();
+             }
+         }
+
+         function submitQuiz() {
+             if (isSubmitted) return;
+             
+             isSubmitted = true;
+             stopTimer();
+             
+             const quizContent = document.getElementById('quiz-content');
+             let score = 0;
+             let html = '';
+
+             questions.forEach((question, qIndex) => {
+                 const userAnswer = userAnswers[qIndex];
+                 const isCorrect = userAnswer === question.correct;
+                 if (isCorrect) score++;
+
+                 html += `
+                     <div class="question-card">
+                         <span class="question-number">${qIndex + 1}</span>
+                         <div class="question-text">${question.question}</div>
+                         <ul class="options-list">
+                             ${question.options.map((option, index) => {
+                                 let className = '';
+                                 if (index === question.correct) {
+                                     className = 'correct';
+                                 } else if (index === userAnswer && !isCorrect) {
+                                     className = 'wrong';
+                                 }
+                                 
+                                 return `
+                                     <li class="option-item">
+                                         <label class="option-label ${className}">
+                                             <input type="radio" disabled ${userAnswer === index ? 'checked' : ''}>
+                                             <span>${String.fromCharCode(65 + index)}. ${option} ${index === question.correct ? '✅' : ''}</span>
+                                         </label>
+                                     </li>
+                                 `;
+                             }).join('')}
+                         </ul>
+                     </div>
+                 `;
+             });
+
+             quizContent.innerHTML = html;
+             document.getElementById('submit-btn').style.display = 'none';
+             document.getElementById('prev-btn').style.display = 'none';
+             document.getElementById('next-btn').style.display = 'none';
+             document.getElementById('restart-btn').style.display = 'block';
+             
+             showResult(score);
+         }
+
+        function showResult(score) {
+            const resultCard = document.getElementById('result-card');
+            const resultIcon = document.getElementById('result-icon');
+            const resultTitle = document.getElementById('result-title');
+            const resultScore = document.getElementById('result-score');
+            const resultMessage = document.getElementById('result-message');
+
+            resultScore.textContent = `${score}/${selectedMode}`;
+
+            let icon, message;
+            const percentage = (score / selectedMode) * 100;
+            
+            if (percentage < 50) {
+                icon = '💪';
+                message = 'Cần cố gắng thêm! Hãy ôn tập lại các mốc lịch sử quan trọng.';
+            } else if (percentage < 70) {
+                icon = '📈';
+                message = 'Bạn đã có kiến thức cơ bản. Tiếp tục phấn đấu!';
+            } else if (percentage < 90) {
+                icon = '🌟';
+                message = 'Bạn làm tốt lắm! Kiến thức của bạn khá vững.';
+            } else {
+                icon = '🏆';
+                message = 'Xuất sắc! Bạn đã nắm vững lịch sử Đảng Cộng sản Việt Nam!';
+            }
+
+            resultIcon.textContent = icon;
+            resultMessage.textContent = message;
+            resultCard.classList.add('show');
+            
+            // Scroll to result
+            resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+         // Event listeners cho mode selection
+         document.querySelectorAll('.mode-card').forEach(card => {
+             card.addEventListener('click', function() {
+                 const mode = this.dataset.mode;
+                 selectMode(mode);
+             });
+         });
+
+         // Event listeners
+         document.getElementById('submit-btn').addEventListener('click', submitQuiz);
+         document.getElementById('restart-btn').addEventListener('click', function() {
+             stopTimer();
+             // Quay lại chọn mode
+             document.getElementById('quiz-mode-selection').style.display = 'block';
+             document.getElementById('quiz-content-wrapper').style.display = 'none';
+         });
+         document.getElementById('next-btn').addEventListener('click', goToNextQuestion);
+         document.getElementById('prev-btn').addEventListener('click', goToPrevQuestion);
+    </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đảng lãnh đạo cả nước quá độ lên Chủ nghĩa xã hội và tiến hành công cuộc đổi mới (1975 - 2018)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chat.css">
+    <!-- Load config: Local development hoặc Vercel production -->
+    <script>
+        // Thử load từ /api/config.js (Vercel) hoặc config.js (local)
+        (function() {
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const configScript = document.createElement('script');
+            configScript.src = isLocal ? 'config.js' : '/api/config.js';
+            configScript.onerror = function() {
+                // Nếu không load được, sử dụng fallback
+                console.warn('Không thể load config.js, sử dụng API key mặc định');
+            };
+            document.head.appendChild(configScript);
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="main-title">Đảng lãnh đạo cả nước quá độ lên Chủ nghĩa xã hội và tiến hành công cuộc đổi mới</h1>
+                <p class="subtitle">(1975 - 2018)</p>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html" class="home-icon active">
+                <img src="Image/icon.jpg" alt="Trang chủ" class="home-icon-img">
+            </a>
+            <ul class="nav-list">
+                <li><a href="moc1.html" class="nav-link">Mốc 1: Chiến dịch Hồ Chí Minh</a></li>
+                <li><a href="moc2.html" class="nav-link">Mốc 2: Đại hội IV</a></li>
+                <li><a href="moc3.html" class="nav-link">Mốc 3: Đại hội V</a></li>
+                <li><a href="moc4.html" class="nav-link">Mốc 4: Đại hội VI</a></li>
+                <li><a href="moc5.html" class="nav-link">Mốc 5: Đại hội VII</a></li>
+                <li><a href="moc6.html" class="nav-link">Mốc 6: Đại hội VIII</a></li>
+                <li><a href="moc7.html" class="nav-link">Mốc 7: Đại hội IX</a></li>
+                <li><a href="moc8.html" class="nav-link">Mốc 8: Đại hội XI</a></li>
+                <li><a href="moc9.html" class="nav-link">Mốc 9: Kỷ niệm 40 năm</a></li>
+                
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <div class="intro-section">
+                <div class="intro-card">
+                    <h2>Chào mừng đến với trang web lịch sử</h2>
+                    <p>Trang web này trình bày các mốc lịch sử quan trọng trong quá trình Đảng lãnh đạo cả nước quá độ lên Chủ nghĩa xã hội và tiến hành công cuộc đổi mới từ năm 1975 đến 2018.</p>
+                    <div class="intro-buttons">
+                        <a href="moc1.html" class="btn-primary">Xem Mốc 1</a>
+                        <a href="moc2.html" class="btn-primary">Xem Mốc 2</a>
+                        <a href="moc3.html" class="btn-primary">Xem Mốc 3</a>
+                        <a href="moc4.html" class="btn-primary">Xem Mốc 4</a>
+                        <a href="moc5.html" class="btn-primary">Xem Mốc 5</a>
+                        <a href="moc6.html" class="btn-primary">Xem Mốc 6</a>
+                        <a href="moc7.html" class="btn-primary">Xem Mốc 7</a>
+                        <a href="moc8.html" class="btn-primary">Xem Mốc 8</a>
+                        <a href="moc9.html" class="btn-primary">Xem Mốc 9</a>
+                        <a href="quiz.html" class="btn-primary">🧠 Làm trắc nghiệm</a>
+                        <a href="report.html" class="btn-primary">Xem Báo cáo</a>
+                    </div>
+                </div>
+
+                <!-- Video Section -->
+                <div class="video-section fade-in">
+                    <div class="section-header">
+                        <h2 class="section-title">🎬 Video giới thiệu</h2>
+                    </div>
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <video id="intro-video" class="intro-video" controls poster="">
+                                <source src="Video/7206247766769.mp4" type="video/mp4">
+                                Trình duyệt của bạn không hỗ trợ video.
+                            </video>
+                            <div class="video-overlay" id="video-overlay">
+                                <div class="play-button" id="play-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                </div>
+                                <p class="video-hint">Nhấn để phát video</p>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-info-item">
+                                <span class="info-icon">📹</span>
+                                <span>Video giới thiệu tổng quan về dự án</span>
+                            </div>
+                            <div class="video-info-item">
+                                <span class="info-icon">⏱️</span>
+                                <span>Tìm hiểu về các mốc lịch sử quan trọng</span>
+                            </div>
+                            <div class="video-info-item">
+                                <span class="info-icon">🎯</span>
+                                <span>Được tạo bằng AI Veo 3</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flipbook Section -->
+                <div class="flipbook-section fade-in">
+                    <div class="section-header">
+                        <h2 class="section-title">📖 Flipbook tương tác</h2>
+                    </div>
+                    <div class="flipbook-container">
+                        <div class="flipbook-wrapper">
+                            <div class="flipbook-preview">
+                                <div class="flipbook-icon-wrapper">
+                                    <div class="flipbook-icon">📚</div>
+                                    <div class="flipbook-glow"></div>
+                                </div>
+                                <h3 class="flipbook-title">Xem Flipbook</h3>
+                                <p class="flipbook-description">Khám phá nội dung dưới dạng sách tương tác với hiệu ứng lật trang sống động</p>
+                                <a href="https://heyzine.com/flip-book/4f7eea910e.html" target="_blank" class="flipbook-button" rel="noopener noreferrer">
+                                    <span class="button-icon">📖</span>
+                                    <span>Mở Flipbook</span>
+                                    <span class="button-arrow">→</span>
+                                </a>
+                            </div>
+                            <div class="flipbook-features">
+                                <div class="flipbook-feature-item">
+                                    <span class="feature-icon">✨</span>
+                                    <span>Hiệu ứng lật trang mượt mà</span>
+                                </div>
+                                <div class="flipbook-feature-item">
+                                    <span class="feature-icon">🔍</span>
+                                    <span>Phóng to, thu nhỏ dễ dàng</span>
+                                </div>
+                                <div class="flipbook-feature-item">
+                                    <span class="feature-icon">📱</span>
+                                    <span>Tương thích mọi thiết bị</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <p>&copy; 2025 - Trang web lịch sử</p>
+        </footer>
+    </div>
+
+    <!-- Chat Widget -->
+    <div id="chat-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </div>
+
+    <div id="chat-widget">
+        <div id="chat-header">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                AI Trợ lý
+            </span>
+            <button id="chat-toggle">×</button>
+        </div>
+        <div id="chat-body"></div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Nhập câu hỏi của bạn...">
+            <button id="send-btn">Gửi</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="chat.js"></script>
+    <script>
+        // Video play button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('intro-video');
+            const overlay = document.getElementById('video-overlay');
+            const playButton = document.getElementById('play-button');
+            
+            if (video && overlay && playButton) {
+                // Click overlay to play
+                overlay.addEventListener('click', function() {
+                    video.play();
+                    overlay.classList.add('hidden');
+                });
+                
+                // Click play button to play
+                playButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    video.play();
+                    overlay.classList.add('hidden');
+                });
+                
+                // Show overlay when video is paused
+                video.addEventListener('pause', function() {
+                    if (video.currentTime > 0 && !video.ended) {
+                        overlay.classList.remove('hidden');
+                    }
+                });
+                
+                // Hide overlay when video ends
+                video.addEventListener('ended', function() {
+                    overlay.classList.remove('hidden');
+                });
+                
+                // Hide overlay when video is playing
+                video.addEventListener('play', function() {
+                    overlay.classList.add('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
