@@ -162,9 +162,6 @@ VNR_Project_red/
 - Google Gemini API (AI Chatbot)
 - Vercel (Hosting)
 
-## Tác giả
-
-Nhóm dự án VNR - Đại học [Tên trường]
 
 ## License
 
